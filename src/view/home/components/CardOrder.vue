@@ -17,12 +17,13 @@ interface Props {
 }
 defineProps<Props>()
 
+
 </script>
 <template>
   <Card class="w-full flex flex-col gap-8">
     <CardHeader class="flex flex-row justify-between items-center">
         <div class="flex flex-col gap-4">
-            <CardDescription>Total Order</CardDescription>
+            <CardDescription>{{ $t("Total Order") }}</CardDescription>
             <CardTitle class=" text-3xl">40,345</CardTitle>
         </div>
         <div class="bg-gray-200 p-4 rounded-3xl bg-blue-200">
@@ -30,7 +31,7 @@ defineProps<Props>()
         </div>
     </CardHeader>
     <CardFooter class="flex justify-between px-6 pb-6">
-        <p><span class=" text-red-500 text-xl">8.5%</span> Up from yastardy</p>
+        <p><span class=" text-red-500 text-xl">8.5%</span> {{ $t("Up from yastardy") }}</p>
     </CardFooter>
   </Card>
 </template>

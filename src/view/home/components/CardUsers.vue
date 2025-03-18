@@ -30,7 +30,7 @@ defineProps<Props>()
         </div>
     </CardHeader>
     <CardFooter class="flex justify-between px-6 pb-6">
-        <p><span class=" text-green-500 text-xl">8.5%</span> Up from yastardy</p>
+        <p><span class=" text-green-500 text-xl">8.5%</span> {{ $t("Up from yastardy") }}</p>
     </CardFooter>
   </Card>
 </template>

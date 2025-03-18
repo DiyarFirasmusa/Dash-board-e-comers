@@ -18,9 +18,14 @@
   "Scheduled": "Scheduled",
   "Completed": "Completed",
   "Cancelled": "Cancelled",
+  "Total Order": "مجموع الطلبات",
+  "Up from yastardy": "ارتفع عن البارحة",
+  "Total Salers": "مجموع المبيعات",
+  "Total Pending": "مجموع الانتظارات",
   "Add to calendar": "هلا",
   "Login": "تسجيل الدخول",
   "My Account": "حسابي الشخصي",
+  
   "Logout": "سجل الخروج",
   "Settings": "الاعدادات",
   "Support": "الدعم",
@@ -100,5 +105,8 @@
   "university": "الجامعة",
   "Title":"اللقب الوظيفي",
   "Employment Type":"نوع الوظيفة",
+  "Creation Date": "تاريخ التسجيل",
+  "category": "الاقسام",
   "Are you sure you want to delete student : ": "هل انت متأكد من رغبتك في حذف هذا الطالب"
+  
 }

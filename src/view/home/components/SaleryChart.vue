@@ -18,6 +18,6 @@ const data = [
     index="name"
     :data="data"
     :categories="['total', 'predicted']"
-    :colors="['#FFE082', '#FDE047']"
+    :colors="['#FFE082', '#8C9EFF']"
   />
 </template>

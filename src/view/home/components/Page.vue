@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import TotalCards from './TotalCards.vue'
 import SaleryChart from './SaleryChart.vue'
+
 </script>
 
 <template>
