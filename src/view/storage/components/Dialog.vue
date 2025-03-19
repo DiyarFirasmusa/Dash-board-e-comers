@@ -84,6 +84,8 @@ const onSubmit = () => {
       <AppFormTextInput v-model="customer.title" name="title" type="text" label="Title" placeholder="Enter title"
         :validation="string().required()" />
       <div />
+      <AppFormTextInput v-model="customer.location" name="location" type="text" label="Location"
+        placeholder="Enter location" :validation="string().required()" />
     </div>
   </AppFormDialog>
 </template>

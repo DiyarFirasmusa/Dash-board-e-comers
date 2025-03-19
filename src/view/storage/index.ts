@@ -4,18 +4,23 @@ import type { Customer } from './types'
 import GlobalTableHeader from '@/components/table/GlobalTableHeader.vue'
 import type { FilterField } from '@/utils/filters/types/filters'
 import TableActions from './components/TableActions.vue'
-import { computed } from 'vue'
+
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   return date.toLocaleDateString('en-US') + ' ' + date.toLocaleTimeString('en-US');
 };
 
-export const URL = '/category';
+export const URL = '/storage';
 export const columns: ColumnDef<Customer>[] = [
   {
     accessorKey: 'title',
     header: () => h(GlobalTableHeader, { label: 'Title' }),
     cell: ({ row }) => h('p', { class: 'text-start' }, row.getValue('title'))
+  },
+  {
+    accessorKey: 'location',
+    header: () => h(GlobalTableHeader, { label: 'Location' }),
+    cell: ({ row }) => h('p', { class: 'text-start' }, row.getValue('location'))
   },
   {
     accessorKey: 'actions',

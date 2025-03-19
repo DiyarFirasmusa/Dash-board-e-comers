@@ -1,6 +1,7 @@
 export interface Customer {
   id: string,
   title: string,
+  location: string,
 }
 
 export const QueryKeys = {

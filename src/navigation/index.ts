@@ -15,5 +15,10 @@ export default [
     icon: 'tabler-category',
     to: '/category',
   },
+  {
+    title: "storage",
+    icon: 'tabler-building-warehouse',
+    to: '/storage',
+  },
 
 ] as (NavigationItem | NavigationHeader)[]
