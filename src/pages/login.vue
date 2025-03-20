@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { string } from "yup";
+import { date, string } from "yup";
 import UserLanguage from "@/components/Layout/navbar/UserLanguage.vue";
 import Usertheme from "@/components/Layout/navbar/Usertheme.vue";
 import AppForm from "@/components/form/AppForm.vue";
@@ -12,6 +12,8 @@ import { RouterLink, useRoute, useRouter } from "vue-router";
 import $api from "@/api/api";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from '@/components/ui/toast/use-toast'
+import { useCookie } from "@/composable/useCookie";
+
 const { toast } = useToast()
 
 const authStore = useAuthStore();
@@ -44,7 +46,7 @@ const onSubmit = async () => {
   isLoading.value = true;
   try {
     const {
-      data: { token, refreshToken }} = await $api_public.post("/auth/login", {
+      data: { token, refreshToken, role }} = await $api_public.post("/auth/login", {
       email: email.value,
       password: password.value,
     });
@@ -52,6 +54,14 @@ const onSubmit = async () => {
       token,
       refreshToken,
     );
+    
+    const {data: {data} } =  await $api.get("/users" , {
+      params: {
+        fullName: role
+      }
+    })
+    authStore.setUserData(...data)
+    
     toast({
       title: 'Success',
       description: 'You have successfully logged in',

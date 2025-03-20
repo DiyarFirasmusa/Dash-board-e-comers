@@ -20,5 +20,10 @@ export default [
     icon: 'tabler-building-warehouse',
     to: '/storage',
   },
+  {
+    title: "item",
+    icon: 'tabler-archive',
+    to: '/items',
+  },
 
 ] as (NavigationItem | NavigationHeader)[]
