@@ -15,14 +15,17 @@ const queryClient = useQueryClient();
 const deleteCallback = (item: Customer) => {
   deleteDialog.showDialog(URL, item.id, () => {
     queryClient.invalidateQueries({ queryKey: [QueryKeys.getAll] })
-  }, t('Are you sure you want to delete customer : ') + item.title);
+  }, t('Are you sure you want to delete customer : ') + item.name);
 }
 const editCallback = (item: Customer) => {
   store.openEditDialog(item.id)
 }
+
+import { useAuthStore } from '@/stores/auth';
+const authStore = useAuthStore();
 </script>
 
 <template>
   <GlobalTableActions :permissions="Permissions" :item="props" :editCallback="editCallback"
-    :deleteCallback="deleteCallback" />
+    :deleteCallback="deleteCallback" v-if="authStore.hasPermission('products.edit')" />
 </template>

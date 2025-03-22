@@ -27,7 +27,6 @@ const visibleCoulmns = computed(() => {
 })
 
 const getData = async () => {
-  
   return (await Client.get<any>(URL, tableStore.options, route.query))
 }
 
@@ -35,12 +34,13 @@ const { data, isLoading, refetch } = useQuery({
   queryKey: [QueryKeys.getAll],
   queryFn: getData,
 })
-
+import { useAuthStore } from '@/stores/auth';
+const authStore = useAuthStore();
 </script>
 <template>
-    <AppCrud :mainFilter="mainFilters" :fetchFn="refetch">
+    <AppCrud :mainFilter="mainFilters" :fetchFn="refetch" v-if="authStore.hasPermission('products.view')">
       <template #actions>      
-          <Button @click="store.openCreateDialog()">
+          <Button @click="store.openCreateDialog()" v-if="authStore.hasPermission('products.create')">
             {{ $t("Add") }}
             <icon icon="tabler-circle-plus" />
           </Button>

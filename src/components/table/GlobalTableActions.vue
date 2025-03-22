@@ -30,22 +30,22 @@ const isRtl = computed(() => useI18n().locale.value == 'ar')
     </DropdownMenuTrigger>
     <DropdownMenuContent>
       <DropdownMenuLabel class="text-center">{{ $t('Actions') }}</DropdownMenuLabel>
-      <Can :permission="permissions.update">
+      
         <DropdownMenuSeparator />
         <DropdownMenuItem class="flex justify-end" :class="isRtl ? 'flex-row' : 'flex-row-reverse'"
           @click="editCallback(item)">
           {{ $t("Edit") }}
           <icon icon="tabler-edit" />
         </DropdownMenuItem>
-      </Can>
-      <Can :permission="permissions.delete">
+      
+      
         <DropdownMenuSeparator />
         <DropdownMenuItem class="flex justify-end" :class="isRtl ? 'flex-row' : 'flex-row-reverse'"
           @click="deleteCallback(item)">
           {{ $t("Delete") }}
           <icon icon="tabler-trash" />
         </DropdownMenuItem>
-      </Can>
+      
       <template v-if="hasSlot('default')">
         <DropdownMenuSeparator />
         <slot :item />

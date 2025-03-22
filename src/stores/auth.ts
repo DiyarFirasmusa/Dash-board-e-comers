@@ -18,8 +18,8 @@ export const useAuthStore = defineStore('auth-store', () => {
   const activeCurrency = ref<Currency>(JSON.parse(localStorage.getItem('currency') ?? JSON.stringify(iraqiDinar)))
 
   const setUserData = (user:any) => {
-    useCookie('user-data').value = user.role ;
-    console.log(user)
+    useCookie('user-data').value = user ;
+    console.log(user.role)
   }
 
   const login = (accessToken: string, refreshToken: string) => {
@@ -33,6 +33,18 @@ export const useAuthStore = defineStore('auth-store', () => {
     useCookie('user-data').value = null;
     router.push('/login')
   }
+
+  const rolePermissions = {
+    SuperAdmin: ['products.create', 'products.edit', 'users.delete','products.view','products.search'],
+    User: ['products.view']
+  };
+
+  const hasPermission = (permission: string) => {
+    const userRole = useCookie('user-data').value.role
+    console.log(userRole)
+    return rolePermissions[userRole]?.includes(permission);
+  };
+
   // const refreshAccessToken = async () => {
   //   const refreshToken = useCookie('refresh-token').value
   //   if (refreshToken) {
@@ -49,12 +61,10 @@ export const useAuthStore = defineStore('auth-store', () => {
     user,
     login,
     logout,
-    can,
     setUserData,
-    // isUserAdmin,
-    permissions,
     accessToken,
     // refreshAccessToken,
-    activeCurrency
+    activeCurrency,
+    hasPermission
   }
 })

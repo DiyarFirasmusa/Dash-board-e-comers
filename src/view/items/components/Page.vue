@@ -13,10 +13,7 @@ import { ref } from 'vue';
 import { Client } from '@/api/client';
 import { URL } from '../';
 import { useTableStore } from '@/stores/table';
-import CanPage from '@/components/auth/CanPage.vue';
-import Can from '@/components/auth/Can.vue';
 const route = useRoute()
-const deletedOnly = ref(false)
 const store = useStore();
 const tableStore = useTableStore();
 const visibleCoulmns = computed(() => {
@@ -35,15 +32,16 @@ const { data, isLoading, refetch } = useQuery({
   queryKey: [QueryKeys.getAll],
   queryFn: getData,
 })
-
+import { useAuthStore } from '@/stores/auth';
+const authStore = useAuthStore();
 </script>
 <template>
-    <AppCrud :mainFilter="mainFilters" :fetchFn="refetch">
-      <template #actions>      
-          <Button @click="store.openCreateDialog()">
+    <AppCrud :mainFilter="mainFilters" :fetchFn="refetch" v-if="authStore.hasPermission('products.view')">
+      <template #actions >      
+          <Button @click="store.openCreateDialog()" v-if="authStore.hasPermission('products.create')">
             {{ $t("Add") }}
             <icon icon="tabler-circle-plus" />
-          </Button>
+          </Button> 
       </template>
       <Table @options="() => refetch()"
         :columns="visibleCoulmns"
@@ -52,6 +50,6 @@ const { data, isLoading, refetch } = useQuery({
         :total-count="data?.totalCount ?? 0"
         :data="data?.data" :isLoading >
       </Table>
-      <Dialog />
-    </AppCrud>
+      <Dialog @refresh="refetch" />
+      </AppCrud>
 </template>

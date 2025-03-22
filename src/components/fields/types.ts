@@ -28,7 +28,7 @@ export interface FileInputProps {
 export interface SelectInputProps extends BaseProps {
   itemLabel: string,
   itemValue: string,
-  items: any[],
+  items: any,
 }
 
 export interface SliderInputProps extends BaseProps {

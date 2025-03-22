@@ -20,9 +20,12 @@ const deleteCallback = (item: Customer) => {
 const editCallback = (item: Customer) => {
   store.openEditDialog(item.id)
 }
+
+import { useAuthStore } from '@/stores/auth';
+const authStore = useAuthStore();
 </script>
 
 <template>
   <GlobalTableActions :permissions="Permissions" :item="props" :editCallback="editCallback"
-    :deleteCallback="deleteCallback" />
+    :deleteCallback="deleteCallback" v-if="authStore.hasPermission('products.edit')" />
 </template>

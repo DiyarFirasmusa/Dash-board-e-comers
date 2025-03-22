@@ -1,6 +1,24 @@
 export interface Customer {
   id: string,
-  title: string,
+  name: string,
+  price: number,
+  img: string,
+  colors: [
+    {
+      name: string,
+      hexColor: string,
+      sizes: [
+        {
+          number: number,
+          count: number
+        }
+      ]
+    }
+  ],
+  categoryTitle: string,
+  storageTitle: string,
+  categoryId: string,
+  storageId: string
 }
 
 export const QueryKeys = {

@@ -9,7 +9,7 @@ import { Client } from '@/api/client';
 import { isPhoneNumber } from '@/utils/validators';
 import { useToast } from '@/components/ui/toast';
 import { URL } from '../';
-
+import $api_public from '@/api/api-public';
 const customer = ref<Partial<Customer>>({});
 const { toast } = useToast();
 
@@ -42,9 +42,7 @@ const cleanup = () => {
 }
 
 const create = async () => {
-  console.log('dd')
   await Client.create<Customer>(URL, customer.value as Customer);
-  
   toast({
     title: 'Success',
     description: 'customer created successfully',
@@ -54,11 +52,36 @@ const create = async () => {
   return customer.value;
 }
 
+const update = async () => {
+  try {
+    console.log(customer.value);
+    await $api_public.put(`${URL}/${store.selectedId}`, customer.value);
+    toast({
+      title: 'Success',
+      description: 'Customer updated successfully',
+      variant: 'default'
+    });
+    cleanup();
+  } catch {
+    toast({
+      title: 'Error',
+      description: 'Failed to update customer',
+      variant: 'destructive'
+    });
+  }
+};
+
 
 const isEdit = computed(() => store.isEditDialogOpen)
 
 const title = computed(() => {
   return (store.isEditDialogOpen ? 'Edit' : 'Create') + ' Customer'
+})
+
+
+const { mutate: updateMutation, isPending: updatePending } = useMutation({
+  mutationKey: [QueryKeys.update],
+  mutationFn: update
 })
 
 const { mutate: createMutation, isPending: createPending } = useMutation({
@@ -73,6 +96,9 @@ const { isFetching: getPending } = useQuery({
 })
 
 const onSubmit = () => {
+  if (isEdit.value)
+    updateMutation();
+  else
     createMutation();
 }
 
@@ -83,7 +109,7 @@ const onSubmit = () => {
     <div class="grid grid-cols- md:grid-cols-2 gap-3 px-1">
       <AppFormTextInput v-model="customer.title" name="title" type="text" label="Title" placeholder="Enter title"
         :validation="string().required()" />
-      <div />
+      <div/>
       <AppFormTextInput v-model="customer.location" name="location" type="text" label="Location"
         placeholder="Enter location" :validation="string().required()" />
     </div>
